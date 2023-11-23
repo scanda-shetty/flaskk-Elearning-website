@@ -1,0 +1,119 @@
+body {
+    background-color: hsl(38, 61%, 73%);
+  }
+
+  .flash-messages {
+    background-color: black;
+    color: hsl(38, 61%, 73%);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    transition: opacity 1s;
+    opacity: 1;
+}
+
+.flash-messages.fade-out {
+    opacity: 0;
+    transition: opacity 2s; /* Adjust the duration to your preference */
+}
+
+  
+  #loginContainer {
+    background-color: #f7f4f4;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1000px;
+    height: 400px;
+    position: fixed;
+    top: -10%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+  }
+  
+  .login-form {
+    padding: 45px;
+  }
+  
+  .image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  img {
+    width: 350px;
+    height: 400px;
+    object-fit: cover;
+    object-position: -30px 0;
+    border-radius: 0 20px 20px 0;
+    transition-duration: 1.2s;
+    filter: brightness(80%);
+  }
+  
+  h2 {
+    text-align: center;
+  }
+  
+  .input-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-family: "Nunito", sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.7px;
+    color: #8c7569;
+    transition: 0.3s;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px 8px;
+    border: 2px solid #c0a89b;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    transition: 0.3s;
+    margin-bottom: 10px;
+  }
+  
+  .form-group:hover {
+    border: 2px solid #8c7569;
+  }
+  
+  .form-group:focus-within {
+    border: 2px solid #8c7569;
+  }
+  
+  .form-group input {
+    outline: 0;
+    border: 0;
+    padding: 4px 0 0;
+    font-size: 14px;
+    font-family: "Nunito", sans-serif;
+    background-color: #f7f4f4;
+  }
+  
+  .form-group input::placeholder {
+    opacity: 0.5;
+  }
+  
+  .forgot {
+    padding-top: 20px;
+  }
+  
+  .forgot a {
+    font-size: 14px;
+    color: rgb(148, 127, 127);
+  }
+  
+  .sign-up {
+    margin: 60px 0 0 0;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .sign-up a {
+    color: #8c7569;
+  }

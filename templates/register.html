@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'login.css') }}">
+    <title>Register</title>
+</head>
+
+<body>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flash-messages">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+    <div id="loginContainer" class="closed">
+        <div class="login-form">
+            <h2>Register</h2>
+            <form action="http://127.0.0.1:5000/register" method="POST">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" name="name" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Register">
+                </div>
+            </form>
+            <div class="sign-up">
+                <p>Have an account? <a href="{{ url_for('login') }}" class="signup">Login</a></p>
+            </div>
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='images/aa.png') }}">
+        </div>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all elements with the flash-messages class
+        var flashMessages = document.querySelectorAll('.flash-messages');
+    
+        // Loop through each flash message
+        flashMessages.forEach(function(message) {
+            // Add the fade-out class after 2 seconds
+            setTimeout(function() {
+                message.classList.add('fade-out');
+            }, 2000);
+        });
+    });
+</script>
+</body>
+</html>

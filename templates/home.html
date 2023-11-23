@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeMantra</title>
+  <meta name="title" content="Codemantra">
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}">
+</head>
+
+<body id="top">
+  <div class="preload" data-preaload>
+    <div class="circle"></div>
+  </div>
+  <!-- {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul class="flash-messages">
+    {% for message in messages %}
+    <li class="flash-message">{{ message }}</li>
+    {% endfor %}
+  </ul>
+  <script>
+    document.querySelectorAll('.flash-message').forEach(function (message) {
+      setTimeout(function () {
+        message.style.opacity = '0';
+        setTimeout(function () {
+          message.style.display = 'none';
+        }, 1000);
+      }, 3000);
+    });
+  </script>
+  {% endif %}
+  {% endwith %} -->
+
+  <div class="topbar">
+    <div class="container">
+      <address class="topbar-item">
+        <div class="icon">
+          <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
+        </div>
+        <span class="span">
+          Headquarters, Bengaluru
+        </span>
+      </address>
+      <div class="separator"></div>
+      <div class="topbar-item item-2">
+        <div class="icon">
+          <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+        </div>
+        <span class="span">Daily : 8.00 am to 11.00 pm</span>
+      </div>
+      <a href="tel:+91234567890" class="topbar-item link">
+        <div class="icon">
+          <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
+        </div>
+        <span class="span">+9876543210</span>
+      </a>
+      <div class="separator"></div>
+      <a href="mailto:xyz@restaurant.com" class="topbar-item link">
+        <div class="icon">
+          <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
+        </div>
+        <span class="span">zyx@gmail.com</span>
+      </a>
+      {% if not is_admin %}
+      <div class="separator"></div>
+      <a href="{{ url_for('update_form') }}">
+        <h5>Update</h5>
+      </a>
+      {% endif %}
+      <div class="separator"></div>
+      <a href="{{ url_for('logout') }}">
+        <h5>Sign Out</h5>
+      </a>
+    </div>
+  </div>
+
+  <header class="header" data-header>
+    <div class="container">
+      <a href="#" class="logo">
+        <img src="{{ url_for('static', filename='images/codee.png') }}" width="160" height="10" alt="Grilli - Home">
+      </a>
+      <nav class="navbar" data-navbar>
+        <button class="close-btn" aria-label="close menu" data-nav-toggler>
+          <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+        </button>
+        <a href="#" class="logo">
+          <img src="{{ url_for('static', filename='images/logo.svg') }}" width="160" height="50" alt="Grilli - Home">
+        </a>
+        <ul class="navbar-list">
+          <li class="navbar-item">
+            <a href="#home" class="navbar-link hover-underline active">
+              <div class="separator"></div>
+              <span class="span">Home</span>
+            </a>
+          </li>
+          <li class="navbar-item">
+            <a href="#about" class="navbar-link hover-underline">
+              <div class="separator"></div>
+              <span class="span">About Us</span>
+            </a>
+          </li>
+          <li class="navbar-item">
+            <a href="#footer" class="navbar-link hover-underline">
+              <div class="separator"></div>
+              <span class="span">Contact</span>
+            </a>
+          </li>
+          {% if is_admin %}
+          <li class="navbar-item">
+              <a href="{{ url_for('curate') }}" class="navbar-link hover-underline">
+                  <div class="separator"></div>
+                  <span class="span">Curate Content</span>
+              </a>
+          </li>
+      {% else %}
+          {% if user_email_in_students_table %}
+              <li class="navbar-item">
+                  <a href="{{ url_for('mycourses') }}" class="navbar-link hover-underline">
+                      <div class="separator"></div>
+                      <span class="span">My Courses</span>
+                  </a>
+              </li>
+          {% endif %}
+      {% endif %}
+        </ul>
+        <div class="text-center">
+          <p class="headline-1 navbar-title">Visit Us</p>
+          <address class="body-4">
+            Woodlanda<br>
+            New York
+          </address>
+          <p class="body-4 navbar-text">Open: 9.30 am - 2.30pm</p>
+
+          <a href="mailto:booking@grilli.com" class="body-4 sidebar-link">booking@grilli.com</a>
+
+          <div class="separator"></div>
+
+          <p class="contact-label">Booking Request</p>
+
+          <a href="tel:+88123123456" class="body-1 contact-number hover-underline">
+            +9123123456
+          </a>
+        </div>
+      </nav>
+      {% if not is_admin %}
+      <a href="#course" class="btn btn-secondary">
+        <span class="text text-1">Start Learning</span>
+        <span class="text text-2" aria-hidden="true">Start Learning</span>
+      </a>
+      <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+        <span class="line line-1"></span>
+        <span class="line line-2"></span>
+        <span class="line line-3"></span>
+      </button>
+      {% else %}
+      <a href="{{ url_for('curate') }}" class="btn btn-secondary">
+        <span class="text text-1">Add Content</span>
+        <span class="text text-2" aria-hidden="true">Add Content</span>
+      </a>
+      <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+        <span class="line line-1"></span>
+        <span class="line line-2"></span>
+        <span class="line line-3"></span>
+      </button>
+      {% endif %}
+      <div class="overlay" data-nav-toggler data-overlay></div>
+    </div>
+  </header>
+<br><br>
+  <main>
+    <article>
+
+
+      <section class="section menu" aria-label="menu-label" id="course">
+        <div class="container">
+          {% if not is_admin %}
+          <br><br>
+          <h1 style="text-align: center; font-size: 42px; color: hsl(38, 61%, 73%);">Our BLack Friday Sale is ON!!</h1>
+          <br><br>
+
+         <p style="text-align: center; font-size: 20px;">HELLO,</p> 
+<p style="text-align: center; font-size: 20px;">I'm Josh.</p>
+<br>
+<p style="text-align: center; font-size: 16px;">Are you feeling stuck or overwhelmed in your coding journey? Don't worry, I've got your back! Together, we'll work to level up your skills, increase your earning potential, and build a brighter future.</p>
+          <br><br>
+
+          {% endif %}
+          <p class="section-subtitle text-center label-2"> Level Up Your Coding Skills</p>
+          <h2 class="headline-1 section-title text-center">Top Selling Courses</h2>
+          <ul class="grid-list">
+            <li>
+              <div class="menu-card hover:card">
+                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                  <img src="{{ url_for('static', filename='images/c1.png') }}" width="100" height="100" loading="lazy"
+                    alt="Greek Salad" class="img-cover">
+                </figure>
+                <div>
+                  <div class="title-wrapper">
+                    <h3 class="title-3">
+                      <a href="{{ url_for('pp') }}" class="card-title">Programming Language</a>
+                    </h3>
+                    <span class="badge label-1"></span>
+                  </div>
+                  <p class="card-text label-1">
+                    Master coding with our Experts.
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="menu-card hover:card">
+                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                  <img src="{{ url_for('static', filename='images/c2.png') }}" width="100" height="100"
+                    loading="lazy" alt="Lasagne" class="img-cover">
+                </figure>
+                <div>
+                  <div class="title-wrapper">
+                    <h3 class="title-3">
+                      <a href="{{ url_for('wb') }}" class="card-title">Web Development</a>
+                    </h3>
+                  </div>
+                  <p class="card-text label-1">
+                    Create High-end Websites with our Experts.
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="menu-card hover:card">
+                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                  <img src="{{ url_for('static', filename='images/c3.png') }}" width="100" height="100" loading="lazy"
+                    alt="Butternut Pumpkin" class="img-cover">
+                </figure>
+                <div>
+                  <div class="title-wrapper">
+                    <h3 class="title-3">
+                      <a href="{{ url_for('AI') }}" class="card-title">AI & ML</a>
+                    </h3>
+                    <span class="badge label-1">New</span>
+                  </div>
+                  <p class="card-text label-1">
+                    Master AI & ML with our Experts.
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="menu-card hover:card">
+                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                  <img src="{{ url_for('static', filename='images/c4.png') }}" width="100" height="100"
+                    loading="lazy" alt="Tokusen Wagyu" class="img-cover">
+                </figure>
+                <div>
+                  <div class="title-wrapper">
+                    <h3 class="title-3">
+                      <a href="{{ url_for('ds') }}" class="card-title">Data Science</a>
+                    </h3>
+                    <span class="badge label-1">New</span>
+                  </div>
+                  <p class="card-text label-1">
+                    Become a Data Scientist with our Experts.
+                  </p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+
+      <section class="section about text-center" aria-labelledby="about-label" id="about">
+        <div class="container">
+          <div class="about-content">
+            <p class="label-2 section-subtitle" id="about-label">Our Story</p>
+            <p class="section-text">
+                Shaw has designed its content to be critically assessed by global academic and professional organisations. By working with universities, industry and academic experts, Upkillist ensures its education delivery provides a diploma for students that is externally validated and recognised by global institutional leaders.
+                Upon completion of the module based assignments students will receive two award                    
+            </p>
+            <div class="contact-label">Contact</div>
+            <a href="tel:+804001234567" class="body-1 contact-number hover-underline">9876543210</a>
+            <a href="#" class="btn btn-primary">
+              <span class="text text-1">Read More</span>
+              <span class="text text-2" aria-hidden="true">Read More</span>
+            </a>
+          </div>
+          <figure class="about-banner">
+            <img src="{{ url_for('static', filename='images/a.png') }}" width="570" height="570"
+              loading="lazy" alt="about banner" class="w-100" data-parallax-item data-parallax-speed="1">
+            <div class="abs-img abs-img-1 has-before" data-parallax-item data-parallax-speed="1.75">
+              <img src="{{ url_for('static', filename='images/b.png') }}" width="285" height="285" loading="lazy"
+                alt="" class="w-100">
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section testi text-center has-bg-image">
+        <!-- style="background-image: url('./assets/images/testimonial-bg.jpg')" aria-label="testimonials"> -->
+        <div class="container">
+          <div class="quote">”</div>
+          <p class="headline-2 testi-text">
+            From challenging the norms to breaking barriers.
+From unlearning set patterns to pioneering new paths.
+From discovering new goals to leading the way for a generation.
+          </p>
+          <div class="wrapper">
+            <div class="separator"></div>
+            <div class="separator"></div>
+            <div class="separator"></div>
+          </div>
+          <div class="profile">
+            <img src="{{ url_for('static', filename='images/testi-avatar.jpg') }}" width="100" height="100"
+              loading="lazy" alt="Sam Jhonson" class="img">
+            <p class="label-2 profile-name">Sam Altman, CEO of ChatGPT</p>
+          </div>
+        </div>
+      </section>
+
+
+
+
+      <footer class="footer section has-bg-image text-center" id="footer"
+        style="background-image: url('code.png')">
+        <div class="container">
+          <div class="footer-top grid-list">
+            <div class="footer-brand has-before has-after">
+              <a href="#" class="logo">
+                <img src="{{ url_for('static', filename='images/codee.png') }}" width="160" height="50" loading="lazy"
+                  alt="Codemantra">
+              </a>
+              <address class="body-4">
+                Bengaluru
+              </address>
+              <a href="mailto:booking@grilli.com" class="body-4 contact-link">xyz@gmail.com</a>
+              <a href="tel:+88123123456" class="body-4 contact-link">Customer Support : +9876543210</a>
+              <p class="body-4">
+                Open : 09:00 am - 01:00 pm
+              </p>
+              <div class="wrapper">
+                <div class="separator"></div>
+                <div class="separator"></div>
+                <div class="separator"></div>
+              </div>
+              <p class="title-1">Get News & Offers</p>
+              <p class="label-1">
+                Subscribe us & Get <span class="span">25% Off.</span>
+              </p>
+            </div>
+            <ul class="footer-list">
+              <li>
+                <a href="#" class="label-2 footer-link hover-underline">Home</a>
+              </li>
+              <li>
+                <a href="#menu" class="label-2 footer-link hover-underline">Courses</a>
+              </li>
+              <li>
+                <a href="#about" class="label-2 footer-link hover-underline">About Us</a>
+              </li>
+              <li>
+                <a href="#footer" class="label-2 footer-link hover-underline">Contact</a>
+              </li>
+            </ul>
+            <ul class="footer-list">
+              <li>
+                <a href="#" class="label-2 footer-link hover-underline">Facebook</a>
+              </li>
+              <li>
+                <a href="#" class="label-2 footer-link hover-underline">Instagram</a>
+              </li>
+              <li>
+                <a href="#" class="label-2 footer-link hover-underline">Twitter</a>
+              </li>
+              <li>
+                <a href="#" class="label-2 footer-link hover-underline">Youtube</a>
+              </li>
+              <li>
+                <a href="#" class="label-2 footer-link hover-underline">Google Map</a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-bottom">
+            <p class="copyright">
+              &copy; Codemantra. All Rights Reserved
+            </p>
+          </div>
+        </div>
+      </footer>
+
+      <a href="#top" class="back-top-btn active" aria-label="back to top" data-back-top-btn>
+        <ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
+      </a>
+
+      <script src="{{url_for('static', filename='js/script.js')}}"></script>
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

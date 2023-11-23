@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'login.css') }}">
+    <title>Login</title>
+</head>
+
+<body>
+    <div id="loginContainer" class="closed">
+        <div class="login-form">
+            <h2>Login</h2>
+            <form action="http://127.0.0.1:5000/dashboard" method="post">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Login">
+                </div>
+            </form>
+            <div class="forgot">
+                <a href="">Forgot Password?</a>
+            </div>
+            <div class="sign-up">
+                <p>Don't have an account? <a href="{{ url_for('register') }}" class="signup">Sign Up</a></p>
+            </div>
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='images/aa.png') }}">
+        </div>
+    </div>
+</body>
+</html>

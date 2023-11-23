@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        #quiz-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .options label {
+            display: block;
+            margin-bottom: 10px;
+            background-color: #ddd;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .options input {
+            margin-right: 5px;
+        }
+
+        #submit-btn {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        #correct-answers {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="quiz-container">
+    <h2>Python Quiz</h2>
+
+    <div class="question" id="question1">
+        <p>What is the capital of Italy?</p>
+        <div class="options">
+            <label><input type="radio" name="q1" value="a">a) Paris</label>
+            <label><input type="radio" name="q1" value="b">b) Rome</label>
+            <label><input type="radio" name="q1" value="c">c) Madrid</label>
+        </div>
+    </div>
+
+    <div class="question" id="question2">
+        <p>Which of the following is a programming language?</p>
+        <div class="options">
+            <label><input type="radio" name="q2" value="a">a) HTML</label>
+            <label><input type="radio" name="q2" value="b">b) Python</label>
+            <label><input type="radio" name="q2" value="c">c) Photoshop</label>
+        </div>
+    </div>
+
+    <div class="question" id="question3">
+        <p>What is 2 + 2?</p>
+        <div class="options">
+            <label><input type="radio" name="q3" value="a">a) 3</label>
+            <label><input type="radio" name="q3" value="b">b) 4</label>
+            <label><input type="radio" name="q3" value="c">c) 5</label>
+        </div>
+    </div>
+
+    <div class="question" id="question4">
+        <p>Which of the following is NOT a Python data type?</p>
+        <div class="options">
+            <label><input type="radio" name="q4" value="a">a) List</label>
+            <label><input type="radio" name="q4" value="b">b) Tuple</label>
+            <label><input type="radio" name="q4" value="c">c) Float</label>
+        </div>
+    </div>
+
+    <div class="question" id="question5">
+        <p>What is the output of the following Python code?<br><code>print(len("Python Quiz"))</code></p>
+        <div class="options">
+            <label><input type="radio" name="q5" value="a">a) 10</label>
+            <label><input type="radio" name="q5" value="b">b) 11</label>
+            <label><input type="radio" name="q5" value="c">c) 12</label>
+        </div>
+    </div>
+
+    <button id="submit-btn" onclick="submitQuiz()">Submit</button>
+
+    <div id="result"></div>
+    <div id="correct-answers"></div>
+</div>
+
+<script>
+    function submitQuiz() {
+        var score = 0;
+
+        // Question 1
+        var q1Answer = document.querySelector('input[name="q1"]:checked');
+        if (q1Answer && q1Answer.value === "b") {
+            score++;
+        }
+
+        // Question 2
+        var q2Answer = document.querySelector('input[name="q2"]:checked');
+        if (q2Answer && q2Answer.value === "b") {
+            score++;
+        }
+
+        // Question 3
+        var q3Answer = document.querySelector('input[name="q3"]:checked');
+        if (q3Answer && q3Answer.value === "b") {
+            score++;
+        }
+
+        // Question 4
+        var q4Answer = document.querySelector('input[name="q4"]:checked');
+        if (q4Answer && q4Answer.value === "c") {
+            score++;
+        }
+
+        // Question 5
+        var q5Answer = document.querySelector('input[name="q5"]:checked');
+        if (q5Answer && q5Answer.value === "a") {
+            score++;
+        }
+
+        // Display result
+        var resultContainer = document.getElementById('result');
+        resultContainer.innerHTML = 'Your score is: ' + score + '/5';
+
+        // Display correct answers
+        var correctAnswersContainer = document.getElementById('correct-answers');
+        correctAnswersContainer.innerHTML = 'Correct Answers: Q1 - b, Q2 - b, Q3 - b, Q4 - c, Q5 - a';
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,215 @@
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{course_name}} Course</title>
+    <style>
+body {
+    background-color: hsl(36, 100%, 95%);
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: black;
+    color: hsl(38, 61%, 73%);
+    text-align: center;
+    padding: 10px;
+}
+
+nav {
+    background-color: hsl(38, 61%, 73%);
+    padding: 10px;
+    width: 100%; /* Make the navigation bar full width */
+    box-sizing: border-box; /* Include padding and border in the total width */
+}
+
+nav a {
+    margin-left: 105px; /* Add margin around each link */
+    margin-right: 105px; /* Add margin around each link */
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    display: inline-block; /* Display links horizontally */
+}
+
+main {
+    padding: 20px;
+}
+
+.course-section {
+    display: none;
+}
+
+h2 {
+    color: #333;
+}
+
+#content {
+    display: block; /* Initially display the content section */
+}
+
+form {
+    margin-top: 20px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+form input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+    background-color: #555;
+}
+
+a {
+    color: #333;
+}
+
+a:hover {
+    color: #555;
+}
+h4{
+    margin-bottom: 0;
+}
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>{{ course_name }}</h1>
+</header>
+
+<nav>
+    <a href="#" onclick="showSection('content')">Content</a>
+    <a href="#" onclick="showSection('resources')">Resources</a>
+    <a href="#" onclick="showSection('assessments')">Assessments</a>
+    <a href="#" onclick="showSection('reviews')">User Reviews</a>
+    <a href="{{ url_for('dashboard') }}">Home</a>
+
+</nav>
+
+<main>
+    <section id="content" class="course-section">
+        <h2>Module 1</h2>
+        <div>
+        <h3>{{ header }}</h3>
+            <img src="{{ url_for('static', filename='images/' + img) }}" alt="Course Image" style="height:500px">
+            <p><a href="{{footer}}">Click here to Watch video</a></p>
+            
+        </div>
+    </section>
+
+
+    <section id="resources" class="course-section">
+        <p>Explore these resources to enhance your learning:</p>
+        <h4>{{ resources }}</h4>
+        <!-- Add links or content for additional resources -->
+        {% if resources %}
+        <a href="{{ url_for('static', filename='uploads/' + resources) }}" download>Download PDF</a>
+        {% endif %}
+    </section>
+
+    <section id="assessments" class="course-section">
+        <p>Check your progress</p>
+        {% if course_name == 'C++' %}
+            <!-- For C++ course -->
+            <a href="{{ url_for('quiz', quiz=quiz) }}">Take Quiz</a>
+        {% elif course_name == 'Python' %}
+            <!-- For Python course -->
+            <a href="{{ url_for('quizz', quiz=quiz) }}">Take Quiz</a>
+        {% elif course_name == 'NLP' %}
+            <!-- For NLP course -->
+            <a href="{{ url_for('quizzz', quiz=quiz) }}">Take Quiz</a>
+        {% elif course_name == 'MERN' %}
+            <!-- For MERN course -->
+            <a href="{{ url_for('quiiz', quiz=quiz) }}">Take Quiz</a>
+        {% else %}
+            <!-- Default case or handle as needed -->
+            <p>No quiz available for this course.</p>
+        {% endif %}
+    </section>
+    
+
+    <section id="reviews" class="course-section">
+        <h2>User Reviews</h2>
+        <!-- Add a form for users to submit reviews -->
+        <form action="/submit_review" method="post">
+            <label for="username">Username:</label>
+            <input type="text" name="username" required><br>
+            <label for="review">Review:</label>
+            <textarea name="review" rows="4" required></textarea><br>
+            <input type="submit" value="Submit Review">
+        </form>
+    </section>
+</main>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Initially hide all sections except for the 'content' section
+        var sections = document.getElementsByClassName('course-section');
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].style.display = 'none';
+        }
+    
+        // Show the 'content' section
+        var contentSection = document.getElementById('content');
+        if (contentSection) {
+            contentSection.style.display = 'block';
+        }
+    });
+    
+    function showSection(sectionId) {
+        // Hide all sections
+        var sections = document.getElementsByClassName('course-section');
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].style.display = 'none';
+        }
+    
+        // Show the selected section
+        var selectedSection = document.getElementById(sectionId);
+        if (selectedSection) {
+            selectedSection.style.display = 'block';
+        }
+    }
+    </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Add click event listener to all elements with class "assessment-link"
+        var assessmentLinks = document.getElementsByClassName("assessment-link");
+        
+        for (var i = 0; i < assessmentLinks.length; i++) {
+            assessmentLinks[i].addEventListener("click", function (event) {
+                event.preventDefault(); // Prevent the default link behavior
+
+                // Get the course_id from the data attribute
+                var courseId = this.getAttribute("data-course-id");
+
+                // Redirect to the quiz route with the appropriate course_id
+                window.location.href = "/quiz?course_id=" + courseId;
+            });
+        }
+    });
+</script>
+
+    
+</body>
+</html>
+
